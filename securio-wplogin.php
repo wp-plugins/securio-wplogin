@@ -1,7 +1,7 @@
 <?php
 /* 
 Plugin Name: Securio WpLogin
-Plugin URI: http://www.securio.com/
+Plugin URI: http://www.secur.io/
 Version: v1.0
 Author: Noah Spirakus
 Description: Securio WP-Login allows you to secure the wordpress login by tracking brute force attempts and by allowing the enabling of Multi-Factor Authentication using Securio's enterprise platform or any TOTP capable device like Google Authenticator
@@ -130,22 +130,19 @@ class Securio_WPLogin{
 		// Table Names
 		define('SECURIO_TABLE_AUTHS', $this->wpdb->prefix . "securio_bf_fails");
 		define('SECURIO_TABLE_BANS', $this->wpdb->prefix . "securio_bf_bans");
-		
-		// Init Logins
-		    if( $Securio_BruteForce ){
-		    	$Securio_BruteForce->init_login();
-		    }else{
-		    	//echo 'Failed to run login->init() for BF';
-		    }
-		    if( $Securio_MFA ){
-		    	$Securio_MFA->init_login();
-			}else{
-		    	//echo 'Failed to run login->init() for MFA';
-		    }
 
 
 	    // Load Options
 		$this->options = securio_get_options();
+
+		
+		// Init Logins
+		    if( $Securio_BruteForce ){
+		    	$Securio_BruteForce->init_login();
+		    }
+		    if( $Securio_MFA ){
+		    	$Securio_MFA->init_login();
+			}
 	    
 
 	    // Add login Action
@@ -171,10 +168,18 @@ class Securio_WPLogin{
 	 */
 	function cleanup(){
 
-		global $Securio_BruteForce, $Securio_MFA;
 
-	    $Securio_BruteForce->cleanup();
-	    //$Securio_MFA->cleanup();
+		if( $this->options['BF_enabled'] ){
+
+			// Clean old BANs
+			$insert = "DELETE FROM " . SECURIO_TABLE_BANS . " WHERE date_added < ".(time() - 86400*14)."";	// 14 days of logs
+			$results = $this->wpdb->query($insert);
+
+			// Clean old Auths
+			$insert = "DELETE FROM " . SECURIO_TABLE_AUTHS . " WHERE date_added < ".(time() - 86400*14)."";	// 14 days of logs
+			$results = $this->wpdb->query($insert);
+			
+		}
 
 		update_option( "Securio_WPLoginCleanupDate", time() );
 
@@ -232,6 +237,8 @@ class Securio_WPLogin{
 		}
 
 		add_option("securio_wplogin_db_version", $this->db_version);
+
+		update_option( "Securio_WPLoginCleanupDate", time() );
 
 	}
 	/**
@@ -390,22 +397,6 @@ class Securio_BruteForce {
 			add_filter('authenticate', 	array( $this, 'BF_wp_authenticate_username_password'), 20, 3);
 				
 		}
-
-	}
-
-
-	/**
-	 * Clean up the Brute Force tables, we dont want them to grow forever
-	 */
-	function cleanup(){
-
-		// Clean old BANs
-		$insert = "DELETE FROM " . SECURIO_TABLE_BANS . " WHERE date_added < ".(time() - 86400*14)."";	// 14 days of logs
-		$results = $this->wpdb->query($insert);
-
-		// Clean old Auths
-		$insert = "DELETE FROM " . SECURIO_TABLE_AUTHS . " WHERE date_added < ".(time() - 86400*14)."";	// 14 days of logs
-		$results = $this->wpdb->query($insert);
 
 	}
 
