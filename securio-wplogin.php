@@ -2,7 +2,7 @@
 /* 
 Plugin Name: Securio WpLogin
 Plugin URI: http://www.securio.com/
-Version: v1.5
+Version: v1.0
 Author: Noah Spirakus
 Description: Securio WP-Login allows you to secure the wordpress login by tracking brute force attempts and by allowing the enabling of Multi-Factor Authentication using Securio's enterprise platform or any TOTP capable device like Google Authenticator
 */
