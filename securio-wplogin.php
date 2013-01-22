@@ -1,17 +1,17 @@
 <?php
 /* 
-Plugin Name: Securio WpLogin
+Plugin Name: Securio WpLogin (beta)
 Plugin URI: http://www.secur.io/
-Version: v1.0
+Version: v0.9
 Author: Noah Spirakus
 Description: Securio WP-Login allows you to secure the wordpress login by tracking brute force attempts and by allowing the enabling of Multi-Factor Authentication using Securio's enterprise platform or any TOTP capable device like Google Authenticator
 */
 
 /*
-* Change Log
-*
-* ver. 1.0 Jan-17-2012
-* - released
+== Change Log ==
+
+	ver. 1.0 Jan-17-2012
+	- released
 */
 
 /*
@@ -21,45 +21,51 @@ Description: Securio WP-Login allows you to secure the wordpress login by tracki
 2. Activate the plugin in the Plugin options.
 3. Customize the settings from the Settings => Securio WPLogin panel, if desired.
 
+*/
 
-----------------------------------------------------------------------------
-------------				SPECIAL THANKS 			  		  --------------
-----------------------------------------------------------------------------
-	Thanks to Michael VanDeMar for his original Login Lockdown plugin
-		http://www.bad-neighborhood.com/
-	Thanks to Henrik Schack for his Google Authenticator plugin
-		http://henrik.schack.dk/
-	Thanks to Bryan Ruiz for his Base32 encode/decode class, found at php.net.
-	Thanks to Tobias Bäthge for his major code rewrite to Google Authenticator plugin
-	Thanks to Daniel Werl for his usability tips integrated in Google Authenticator plugin.
-	Thanks to Dion Hulse for his bugfixes to Google Authenticator.
-----------------------------------------------------------------------------
-----------------------------------------------------------------------------
+/*
+== SPECIAL THANKS ==
 
-
-	Securio WpLogin - Secure your login using Multi-Factor and mitigate bruteforce login attempts.
-	Copyright (C) 2012 - 2013, Noah Spirakus, http://www.secur.io || http://www.noahjs.com
-	All rights reserved.                             
-	
-	
-
-	License: GPL
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+Thanks to Michael VanDeMar for his original Login Lockdown plugin
+	http://www.bad-neighborhood.com/
+Thanks to Henrik Schack for his Google Authenticator plugin
+	http://henrik.schack.dk/
+Thanks to Bryan Ruiz for his Base32 encode/decode class, found at php.net.
+Thanks to Tobias Bäthge for his major code rewrite to Google Authenticator plugin
+Thanks to Daniel Werl for his usability tips integrated in Google Authenticator plugin.
+Thanks to Dion Hulse for his bugfixes to Google Authenticator.
 
 */
+
+/*
+== Licensing ==
+
+Securio WpLogin - Secure your login using Multi-Factor and mitigate bruteforce login attempts.
+Copyright (C) 2012 - 2013, Noah Spirakus, http://www.secur.io || http://www.noahjs.com
+All rights reserved.
+
+License: GPL
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+*/
+
+
+
+
+
 
 
 /**
